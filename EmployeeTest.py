@@ -80,5 +80,10 @@ class EmployeeTest(unittest.TestCase):
         self.assertEqual(f'{70.8:g}', employee.getNetTax(142.8, 72))
 
 
+    def test_calculatePRSI(self):
+        employee = Employee('12345', 'Green', 'Joe', 37, 16, 1.5, 72, 710)
+        self.assertEqual(28.48, employee.getPRSI(712))
+
+
 if __name__ == '__main__':
     unittest.main()

@@ -31,6 +31,7 @@ class Employee:
         self.employInfo['Total Tax'] = self.getTotalTax(self.employInfo['Standard Tax'], self.employInfo['Higher Tax'])
         self.employInfo['Tax Credit'] = self.taxCredit
         self.employInfo['Net Tax'] = self.getNetTax(self.employInfo['Total Tax'], self.employInfo['Tax Credit'])
+        self.employInfo['PRSI'] = self.getPRSI(self.employInfo['Gross Pay'])
         return self.employInfo
 
 
@@ -87,3 +88,7 @@ class Employee:
 
     def getNetTax(self, taxTotal, taxCredit):
         return f'{(taxTotal - taxCredit):g}'
+
+
+    def getPRSI(self, grossPay):
+        return grossPay * self.taxRates['PRSI'] / 100
