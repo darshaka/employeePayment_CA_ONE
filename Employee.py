@@ -29,6 +29,8 @@ class Employee:
         self.employInfo['Standard Tax'] = self.getStandardTax(self.employInfo['Standard Rate Pay'])
         self.employInfo['Higher Tax'] = self.getHigherTax(self.employInfo['Higher Rate Pay'])
         self.employInfo['Total Tax'] = self.getTotalTax(self.employInfo['Standard Tax'], self.employInfo['Higher Tax'])
+        self.employInfo['Tax Credit'] = self.taxCredit
+        self.employInfo['Net Tax'] = self.getNetTax(self.employInfo['Total Tax'], self.employInfo['Tax Credit'])
         return self.employInfo
 
 
@@ -82,3 +84,6 @@ class Employee:
 
     def getTotalTax(self, standardTax, higherTax):
         return standardTax + higherTax
+
+    def getNetTax(self, taxTotal, taxCredit):
+        return f'{(taxTotal - taxCredit):g}'

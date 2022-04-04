@@ -75,5 +75,10 @@ class EmployeeTest(unittest.TestCase):
         self.assertEqual(142.8, employee.getTotalTax(142, .8))
 
 
+    def test_calculateNetTax(self):
+        employee = Employee('12345', 'Green', 'Joe', 37, 16, 1.5, 72, 710)
+        self.assertEqual(f'{70.8:g}', employee.getNetTax(142.8, 72))
+
+
 if __name__ == '__main__':
     unittest.main()
