@@ -29,3 +29,6 @@ class Employee:
         if(self.regHours > totalWorkHours):
             return totalWorkHours * self.hourlyRate
         return self.regHours * self.hourlyRate
+
+    def getOverTimePay(self, totalWorkHours):
+        return self.getOverTimeRate() * self.getOverTimeHours(totalWorkHours)
