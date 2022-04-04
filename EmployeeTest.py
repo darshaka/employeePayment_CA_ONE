@@ -30,5 +30,12 @@ class EmployeeTest(unittest.TestCase):
         self.assertEqual(31.5, employee2.getOverTimeRate())
 
 
+    def test_calculateRegularPay(self):
+        employee = Employee('12345', 'Green', 'Joe', 37, 16, 1.5, 72, 710)
+        self.assertEqual(592, employee.getRegularPay(42))
+        self.assertEqual(592, employee.getRegularPay(37))
+        self.assertEqual(432, employee.getRegularPay(27))
+
+
 if __name__ == '__main__':
     unittest.main()
