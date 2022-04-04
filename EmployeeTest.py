@@ -15,5 +15,12 @@ class EmployeeTest(unittest.TestCase):
         self.assertEqual(710, employee.standardBand)
 
 
+    def test_validateOverTimeHours(self):
+        employee = Employee('12345', 'Green', 'Joe', 37, 16, 1.5, 72, 710)
+        self.assertEqual(5, employee.getOverTimeHours(42))
+        self.assertEqual(0, employee.getOverTimeHours(37))
+        self.assertEqual(0, employee.getOverTimeHours(20))
+
+
 if __name__ == '__main__':
     unittest.main()
