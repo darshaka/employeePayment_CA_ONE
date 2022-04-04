@@ -15,6 +15,13 @@ class EmployeeTest(unittest.TestCase):
         self.assertEqual(710, employee.standardBand)
 
 
+    def test_getName(self):
+        employee = Employee('12345', 'Green', 'Joe', 37, 16, 1.5, 72, 710)
+        result = employee.computePayment(42, '31/10/2021')
+        self.assertEqual('Joe Green', result['name'])
+        self.assertEqual('31/10/2021', result['date'])
+
+
     def test_validateOverTimeHours(self):
         employee = Employee('12345', 'Green', 'Joe', 37, 16, 1.5, 72, 710)
         self.assertEqual(5, employee.getOverTimeHours(42))

@@ -1,5 +1,7 @@
 class Employee:
 
+    employInfo = {}
+
     def __init__(self, staffID, lastName, firstName, regHours, hourlyRate, oTMultiple, taxCredit, standardBand):
         self.staffId = staffID
         self.lastName = lastName
@@ -11,8 +13,14 @@ class Employee:
         self.standardBand = standardBand
 
 
-    def computePayment(self):
-        return {}
+    def computePayment(self, totalWorkHours, date):
+        self.employInfo['name'] = self.getName()
+        self.employInfo['date'] = date
+        return self.employInfo
+
+
+    def getName(self):
+        return self.firstName + " " + self.lastName
 
 
     def getOverTimeHours(self, totalWorkHours):
