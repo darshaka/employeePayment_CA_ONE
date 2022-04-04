@@ -15,13 +15,16 @@ class Employee:
 
     def computePayment(self, totalWorkHours, date):
         self.employInfo['name'] = self.getName()
-        self.employInfo['date'] = date
+        self.employInfo['Date'] = date
         self.employInfo['Regular Hours Worked'] = self.regHours
         self.employInfo['Overtime Hours Worked'] = self.getOverTimeHours(totalWorkHours)
         self.employInfo['Regular Rate'] = self.hourlyRate
         self.employInfo['Overtime Rate'] = self.getOverTimeRate()
         self.employInfo['Regular Pay'] = self.getRegularPay(totalWorkHours)
         self.employInfo['Overtime Pay'] = self.getOverTimePay(self.employInfo['Overtime Hours Worked'])
+        self.employInfo['Gross Pay'] = self.getGrossPay(self.employInfo['Regular Pay'], self.employInfo['Overtime Pay'])
+        self.employInfo['Standard Rate Pay'] = self.standardBand
+        self.employInfo['Higher Rate Pay'] = self.getHigherRatePay(self.employInfo['Gross Pay'], self.employInfo['Standard Rate Pay'])
         return self.employInfo
 
 
@@ -44,5 +47,16 @@ class Employee:
             return totalWorkHours * self.hourlyRate
         return self.regHours * self.hourlyRate
 
+
     def getOverTimePay(self, overTimeHours):
         return self.getOverTimeRate() * overTimeHours
+
+
+    def getGrossPay(self, regularPay, overTimePay):
+        return regularPay + overTimePay
+
+
+    def getHigherRatePay(self, grossPay, standardPay):
+        if(grossPay < standardPay):
+            return 0
+        return grossPay - standardPay

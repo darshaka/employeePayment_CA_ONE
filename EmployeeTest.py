@@ -19,7 +19,6 @@ class EmployeeTest(unittest.TestCase):
         employee = Employee('12345', 'Green', 'Joe', 37, 16, 1.5, 72, 710)
         result = employee.computePayment(42, '31/10/2021')
         self.assertEqual('Joe Green', result['name'])
-        self.assertEqual('31/10/2021', result['date'])
 
 
     def test_validateOverTimeHours(self):
@@ -48,6 +47,18 @@ class EmployeeTest(unittest.TestCase):
         employee = Employee('12345', 'Green', 'Joe', 37, 16, 1.5, 72, 710)
         self.assertEqual(120, employee.getOverTimePay(5))
         self.assertEqual(0, employee.getOverTimePay(0))
+
+
+    def test_calculateGrossPay(self):
+        employee = Employee('12345', 'Green', 'Joe', 37, 16, 1.5, 72, 710)
+        self.assertEqual(20, employee.getGrossPay(15, 5))
+
+
+    def test_calculateHigherRatePay(self):
+        employee = Employee('12345', 'Green', 'Joe', 37, 16, 1.5, 72, 710)
+        self.assertEqual(10, employee.getHigherRatePay(720, 710))
+        self.assertEqual(0, employee.getHigherRatePay(700, 710))
+
 
 
 if __name__ == '__main__':
