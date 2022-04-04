@@ -28,6 +28,7 @@ class Employee:
         self.employInfo['Higher Rate Pay'] = self.getHigherRatePay(self.employInfo['Gross Pay'], self.employInfo['Standard Rate Pay'])
         self.employInfo['Standard Tax'] = self.getStandardTax(self.employInfo['Standard Rate Pay'])
         self.employInfo['Higher Tax'] = self.getHigherTax(self.employInfo['Higher Rate Pay'])
+        self.employInfo['Total Tax'] = self.getTotalTax(self.employInfo['Standard Tax'], self.employInfo['Higher Tax'])
         return self.employInfo
 
 
@@ -77,3 +78,7 @@ class Employee:
 
     def getHigherTax(self, higherPay):
         return higherPay * self.taxRates['higherRate'] / 100
+
+
+    def getTotalTax(self, standardTax, higherTax):
+        return standardTax + higherTax
