@@ -1,6 +1,7 @@
 class Employee:
 
     employInfo = {}
+    taxRates = {'standardRate': 20, 'higherRate': 40, 'PRSI': 4}
 
     def __init__(self, staffID, lastName, firstName, regHours, hourlyRate, oTMultiple, taxCredit, standardBand):
         self.staffId = staffID
@@ -23,8 +24,9 @@ class Employee:
         self.employInfo['Regular Pay'] = self.getRegularPay(totalWorkHours)
         self.employInfo['Overtime Pay'] = self.getOverTimePay(self.employInfo['Overtime Hours Worked'])
         self.employInfo['Gross Pay'] = self.getGrossPay(self.employInfo['Regular Pay'], self.employInfo['Overtime Pay'])
-        self.employInfo['Standard Rate Pay'] = self.standardBand
+        self.employInfo['Standard Rate Pay'] = self.getStandardRatePay(self.standardBand, self.employInfo['Gross Pay'])
         self.employInfo['Higher Rate Pay'] = self.getHigherRatePay(self.employInfo['Gross Pay'], self.employInfo['Standard Rate Pay'])
+        self.employInfo['Standard Tax'] = self.getStandardTax(self.employInfo['Standard Rate Pay'])
         return self.employInfo
 
 
@@ -60,3 +62,13 @@ class Employee:
         if(grossPay < standardPay):
             return 0
         return grossPay - standardPay
+
+
+    def getStandardRatePay(self, standardBand, grossPay):
+        if(grossPay > standardBand):
+            return standardBand
+        return grossPay
+
+
+    def getStandardTax(self, standardPay):
+        return standardPay * self.taxRates['standardRate'] / 100
