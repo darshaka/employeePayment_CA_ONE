@@ -46,9 +46,8 @@ class EmployeeTest(unittest.TestCase):
 
     def test_calculateOverTimePay(self):
         employee = Employee('12345', 'Green', 'Joe', 37, 16, 1.5, 72, 710)
-        self.assertEqual(120, employee.getOverTimePay(42))
-        self.assertEqual(0, employee.getOverTimePay(37))
-        self.assertEqual(0, employee.getOverTimePay(20))
+        self.assertEqual(120, employee.getOverTimePay(5))
+        self.assertEqual(0, employee.getOverTimePay(0))
 
 
 if __name__ == '__main__':
