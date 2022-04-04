@@ -22,5 +22,13 @@ class EmployeeTest(unittest.TestCase):
         self.assertEqual(0, employee.getOverTimeHours(20))
 
 
+    def test_calculateOverTimeRate(self):
+        employee1 = Employee('12345', 'Green', 'Joe', 37, 16, 1.5, 72, 710)
+        self.assertEqual(24, employee1.getOverTimeRate())
+
+        employee2 = Employee('12345', 'Green', 'Joe', 37, 21, 1.5, 72, 710)
+        self.assertEqual(31.5, employee2.getOverTimeRate())
+
+
 if __name__ == '__main__':
     unittest.main()

@@ -14,7 +14,12 @@ class Employee:
     def computePayment(self):
         return {}
 
+
     def getOverTimeHours(self, totalWorkHours):
         if(self.regHours > totalWorkHours):
             return 0
         return totalWorkHours - self.regHours
+
+
+    def getOverTimeRate(self):
+        return self.hourlyRate * self.oTMultiple
