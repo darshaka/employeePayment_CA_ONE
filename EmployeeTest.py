@@ -49,10 +49,41 @@ class EmployeeTest(unittest.TestCase):
             employee.computePayment(-1, '31/10/2021')
 
 
-    def test_getName(self):
+    def test_getName1(self):
         employee = Employee('12345', 'One', 'Two', 37, 16, 1.5, 72, 710)
         result = employee.computePayment(42, '31/10/2021')
         self.assertEqual('Two One', result['name'])
+
+    def test_getName2(self):
+        employee = Employee('12345', 'One', None, 37, 16, 1.5, 72, 710)
+        result = employee.computePayment(42, '31/10/2021')
+        self.assertEqual('One', result['name'])
+
+
+    def test_getName3(self):
+        employee = Employee('12345', None, 'Two', 37, 16, 1.5, 72, 710)
+        result = employee.computePayment(42, '31/10/2021')
+        self.assertEqual('Two', result['name'])
+
+
+    def test_getName4(self):
+        employee = Employee('12345', None, None, 37, 16, 1.5, 72, 710)
+        with self.assertRaises(AssertionError):
+            employee.computePayment(42, '31/10/2021')
+
+    def test_overTimeRate(self):
+        employee1 = Employee('12345', 'Green', 'Joe', 37, -16, 1.5, 72, 710)
+        with self.assertRaises(ValueError):
+            employee1.computePayment(42, '31/10/2021')
+
+        employee2 = Employee('12345', 'Green', 'Joe', 37, 16, 1, 72, 710)
+        result = employee2.computePayment(42, '31/10/2021')
+        self.assertEqual(16, result['Overtime Rate'])
+
+        employee3 = Employee('12345', 'Green', 'Joe', 37, 16, 0, 72, 710)
+        with self.assertRaises(ValueError):
+            employee3.computePayment(42, '31/10/2021')
+
 
 
 if __name__ == '__main__':
