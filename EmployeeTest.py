@@ -1,6 +1,4 @@
 import unittest
-import decimal
-from decimal import Decimal
 
 from Employee import Employee
 
