@@ -1,4 +1,6 @@
 import unittest
+import decimal
+from decimal import Decimal
 
 from Employee import Employee
 
@@ -77,12 +79,22 @@ class EmployeeTest(unittest.TestCase):
 
     def test_calculateNetTax(self):
         employee = Employee('12345', 'Green', 'Joe', 37, 16, 1.5, 72, 710)
-        self.assertEqual(f'{70.8:g}', employee.getNetTax(142.8, 72))
+        self.assertEqual(float(f'{70.8:g}'), employee.getNetTax(142.8, 72))
 
 
     def test_calculatePRSI(self):
         employee = Employee('12345', 'Green', 'Joe', 37, 16, 1.5, 72, 710)
         self.assertEqual(28.48, employee.getPRSI(712))
+
+
+    def test_netDeduction(self):
+        employee = Employee('12345', 'Green', 'Joe', 37, 16, 1.5, 72, 710)
+        self.assertEqual(99.28, employee.getNetDeductions(70.8, 28.48))
+
+
+    def test_calculateNetPay(self):
+        employee = Employee('12345', 'Green', 'Joe', 37, 16, 1.5, 72, 710)
+        self.assertEqual(612.72, employee.getNetPay(712, 99.28))
 
 
 if __name__ == '__main__':

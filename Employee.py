@@ -1,3 +1,5 @@
+import math
+
 class Employee:
 
     employInfo = {}
@@ -32,6 +34,8 @@ class Employee:
         self.employInfo['Tax Credit'] = self.taxCredit
         self.employInfo['Net Tax'] = self.getNetTax(self.employInfo['Total Tax'], self.employInfo['Tax Credit'])
         self.employInfo['PRSI'] = self.getPRSI(self.employInfo['Gross Pay'])
+        self.employInfo['Net Deductions'] = self.getNetDeductions(self.employInfo['Net Tax'], self.employInfo['PRSI'])
+        self.employInfo['Net Pay'] = self.getNetPay(self.employInfo['Gross Pay'], self.employInfo['Net Deductions'])
         return self.employInfo
 
 
@@ -87,8 +91,16 @@ class Employee:
         return standardTax + higherTax
 
     def getNetTax(self, taxTotal, taxCredit):
-        return f'{(taxTotal - taxCredit):g}'
+        return float(f'{(taxTotal - taxCredit):g}')
 
 
     def getPRSI(self, grossPay):
         return grossPay * self.taxRates['PRSI'] / 100
+
+
+    def getNetDeductions(self, netTax, pRSI):
+        return netTax + pRSI
+
+
+    def getNetPay(self, grossPay, netDecution):
+        return grossPay - netDecution
