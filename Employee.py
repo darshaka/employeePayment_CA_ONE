@@ -15,6 +15,9 @@ class Employee:
 
 
     def computePayment(self, totalWorkHours, date):
+        if(totalWorkHours < 0) :
+            raise ValueError('Invalid workHours count')
+
         self.employInfo['name'] = self.getName()
         self.employInfo['Date'] = date
         self.employInfo['Regular Hours Worked'] = self.regHours
@@ -88,8 +91,12 @@ class Employee:
     def getTotalTax(self, standardTax, higherTax):
         return standardTax + higherTax
 
+
     def getNetTax(self, taxTotal, taxCredit):
-        return float(f'{(taxTotal - taxCredit):g}')
+        netTax = float(f'{(taxTotal - taxCredit):g}')
+        if(netTax < 0):
+            return 0
+        return netTax
 
 
     def getPRSI(self, grossPay):
